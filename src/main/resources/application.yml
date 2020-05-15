@@ -1,0 +1,16 @@
+server:
+  port: 80
+
+spring:
+  resources:
+    static-locations: classpath:view/
+  datasource:
+    username: root
+    password: 950828
+    url: jdbc:mysql://127.0.0.1:3306/cltest?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  type-aliases-package: org.jpcl.apiToll.dao
+
+
