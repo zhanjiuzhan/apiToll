@@ -24,7 +24,7 @@ public interface ApiMapper {
      * @param api
      * @return
      */
-    @Update("UPDATE api SET des=#{des}, content=#{content}, update=now() WHERE id=#{id}")
+    @Update("UPDATE api SET des=#{des}, content=#{content} WHERE id=#{id}")
     int update(Api api);
 
     /**
@@ -41,4 +41,12 @@ public interface ApiMapper {
      */
     @Select("SELECT * FROM api")
     List<Api> gets();
+
+    /**
+     * 查询一个
+     * @param id
+     * @return
+     */
+    @Select("SELECT * FROM api WHERE id=#{id}")
+    Api get(int id);
 }

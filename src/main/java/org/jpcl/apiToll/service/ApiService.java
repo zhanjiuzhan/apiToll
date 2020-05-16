@@ -5,6 +5,7 @@ import org.jpcl.apiToll.model.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class ApiService {
      */
 
     public int update(Api api) {
+        api.setUpdate(new Date());
         return apiMapper.update(api);
     }
 
@@ -50,9 +52,15 @@ public class ApiService {
      * 查询
      * @return
      */
-
     public List<Api> gets() {
         return apiMapper.gets();
     }
 
+    /**
+     * 查询
+     * @return
+     */
+    public Api get(int id) {
+        return apiMapper.get(id);
+    }
 }

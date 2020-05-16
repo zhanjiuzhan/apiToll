@@ -57,4 +57,18 @@ public class ApiController {
         return apiService.gets();
     }
 
+    /**
+     * 查询
+     * @return
+     */
+    @RequestMapping("/save")
+    int save(Api obj) {
+        Api api = apiService.get(obj.getId());
+        if (api == null) {
+            return apiService.add(obj);
+        } else {
+            return apiService.update(obj);
+        }
+    }
+
 }
