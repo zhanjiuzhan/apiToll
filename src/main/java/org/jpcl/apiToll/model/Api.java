@@ -11,6 +11,8 @@ public class Api {
     private String des;
     private String content;
     private Date update;
+    private String demo1;
+    private String demo2;
 
     public int getId() {
         return id;
@@ -52,6 +54,22 @@ public class Api {
         this.update = ipdate;
     }
 
+    public String getDemo1() {
+        return demo1;
+    }
+
+    public void setDemo1(String demo1) {
+        this.demo1 = demo1;
+    }
+
+    public String getDemo2() {
+        return demo2;
+    }
+
+    public void setDemo2(String demo2) {
+        this.demo2 = demo2;
+    }
+
     @Override
     public String toString() {
         return "Api{" +
@@ -60,6 +78,8 @@ public class Api {
                 ", des='" + des + '\'' +
                 ", content='" + content + '\'' +
                 ", update=" + update +
+                ", demo1='" + demo1 + '\'' +
+                ", demo2='" + demo2 + '\'' +
                 '}';
     }
 }

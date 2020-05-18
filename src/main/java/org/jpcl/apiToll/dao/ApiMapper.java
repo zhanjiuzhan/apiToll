@@ -16,7 +16,7 @@ public interface ApiMapper {
      * @param api
      * @return
      */
-    @Insert("INSERT INTO api(url, des, content, update) VALUES (#{url}, #{des}, #{content}, #{update})")
+    @Insert("INSERT INTO api(url, des, content, demo1, demo2) VALUES (#{url}, #{des}, #{content}, #{demo1}, #{demo2})")
     int add(Api api);
 
     /**
@@ -24,7 +24,7 @@ public interface ApiMapper {
      * @param api
      * @return
      */
-    @Update("UPDATE api SET des=#{des}, content=#{content} WHERE id=#{id}")
+    @Update("UPDATE api SET des=#{des}, content=#{content}, demo1=#{demo1}, demo2=#{demo2} WHERE id=#{id}")
     int update(Api api);
 
     /**

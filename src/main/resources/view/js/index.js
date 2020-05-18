@@ -92,6 +92,7 @@ function getCDiv() {
 function getform(obj) {
     let $form = getEle("from");
 
+    // 描述
     let $des = getEle("div");
     let $des3 = getEle("div");
     $des.addClass("rowDiv");
@@ -108,6 +109,39 @@ function getform(obj) {
     $des4.addClass("save");
     $des.append($des3[0], $des4[0], getCDiv());
 
+    // demo1
+    let $demo1= getEle("div");
+    let $demo1_t = getEle("div");
+    $demo1.addClass("rowDiv");
+
+    $demo1_t.addClass("filed");
+    $demo1_t.text("举例");
+    let $demo1_c = getEle("label");
+    $demo1_c.attr({
+        "readonly": true,
+        "id": "demo1" + obj.id
+    });
+    $demo1_c.text(obj.demo1);
+    $demo1_c.addClass("desContent");
+    $demo1_c.addClass("save");
+    $demo1.append($demo1_t, $demo1_c, getCDiv());
+    // demo2
+    let $demo2= getEle("div");
+    let $demo2_t = getEle("div");
+    $demo2.addClass("rowDiv");
+
+    $demo2_t.addClass("filed");
+    $demo2_t.text("举例");
+    let $demo2_c = getEle("label");
+    $demo2_c.attr({
+        "readonly": true,
+        "id": "demo2" + obj.id
+    });
+    $demo2_c.text(obj.demo2);
+    $demo2_c.addClass("desContent");
+    $demo2_c.addClass("save");
+    $demo2.append($demo2_t, $demo2_c, getCDiv());
+
     let $request = getEle("div");
     $request.text("Request");
     $request.css({
@@ -120,7 +154,7 @@ function getform(obj) {
     });
     $response.text("Response");
     $response.addClass("reqresRow");
-    $form.append($des[0], $request[0], getRequestDiv(obj, "req"), $response[0], getRequestDiv(obj, "res"));
+    $form.append($des[0], $request[0], getRequestDiv(obj, "req"), $demo1, $response[0], getRequestDiv(obj, "res"), $demo2);
     return $form[0];
 }
 
@@ -132,6 +166,14 @@ function edit(id) {
     $("#des" + id).attr("contenteditable", "true");
     $("#des" + id).addClass("edit");
     $("#des" + id).removeClass("save");
+    // demo的可以编辑
+    $("#demo1" + id).attr("contenteditable", "true");
+    $("#demo1" + id).addClass("edit");
+    $("#demo1" + id).removeClass("save");
+    $("#demo2" + id).attr("contenteditable", "true");
+    $("#demo2" + id).addClass("edit");
+    $("#demo2" + id).removeClass("save");
+
     // 可以进行添加字段描述
     $("#btn_add_req" + id).show();
     $("#btn_add_res" + id).show();
@@ -159,6 +201,15 @@ function save(obj) {
     $("#des" + obj.id).attr("contenteditable", "false");
     $("#des" + obj.id).addClass("save");
     $("#des" + obj.id).removeClass("edit");
+    // demo的可以保存
+    let demo1 = $("#demo1" + obj.id).text();
+    $("#demo1" + obj.id).attr("contenteditable", "false");
+    $("#demo1" + obj.id).addClass("save");
+    $("#demo1" + obj.id).removeClass("edit");
+    let demo2 = $("#demo2" + obj.id).text();
+    $("#demo2" + obj.id).attr("contenteditable", "false");
+    $("#demo2" + obj.id).addClass("save");
+    $("#demo2" + obj.id).removeClass("edit");
     // 可以进行添加字段描述
     $("#btn_add_req" + obj.id).hide();
     $("#btn_add_res" + obj.id).hide();
@@ -192,7 +243,7 @@ function save(obj) {
         i+=3;
     }
 
-    let http = "http://localhost/api/save?id=" + obj.id + "&url=" + obj.url + "&des=" + destext + "&content=" + encodeURI(JSON.stringify(json));
+    let http = "http://localhost/api/save?id=" + obj.id + "&url=" + obj.url + "&des=" + destext + "&content=" + encodeURI(JSON.stringify(json)) + "&demo1=" + encodeURI(demo1) + "&demo2=" + encodeURI(demo2);
     ajaxGet(http, (data)=> {
         alert("保存成功")
     });
