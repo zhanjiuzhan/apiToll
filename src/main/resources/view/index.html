@@ -111,11 +111,13 @@
             font-weight: bold;
             width: 75%;
             float: left;
+            word-wrap: break-word;
         }
         .desContent {
             padding: 5px 10px;
             width: 86.5%;
             float: left;
+            word-wrap: break-word;
         }
         .filed_data {
             padding: 5px 10px;
@@ -123,6 +125,7 @@
             width: 9.8%;
             float: left;
             display: block;
+            word-wrap: break-word;
         }
 
         .type_data {
@@ -131,12 +134,14 @@
             width: 9.8%;
             float: left;
             display: block;
+            word-wrap: break-word;
         }
         .des_data_save {
             padding: 5px 10px;
             width: 75%;
             float: left;
             display: block;
+            word-wrap: break-word;
         }
 
         .des_data_edit {
@@ -145,6 +150,7 @@
             width: 64.8%;
             float: left;
             display: block;
+            word-wrap: break-word;
         }
         button {
             background-color: aliceblue;
@@ -174,7 +180,14 @@
                 </li>
             </ul>
         </div>
-        <div class="body" id="body">
+        <div class="body">
+        <div style="margin-bottom: 10px">
+            <el-row>
+                <el-col :span="1" style="padding-top: 4px">根路径: </el-col>
+                <el-col :span="6"><el-input v-model="url" placeholder="默认为: http://localhost" size="mini"></el-input></el-col>
+            </el-row>
+        </div>
+        <div id="body"></div>
         </div>
     </div>
 </body>

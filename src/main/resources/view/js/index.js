@@ -6,10 +6,13 @@ async function ajaxGet(url, successFun) {
         });
 }
 
+let baseUrl = {url: "http://localhost"};
+
 new Vue({
     el: '#app',
     data: {
-        apis: []
+        apis: [],
+        url: baseUrl.url,
     },
     created: async function() {
         this.apis = [];
@@ -50,7 +53,7 @@ function urlDescription(obj) {
     $des1.text("URL");
     let $des2 = getEle("div");
     $des2.addClass("urlContent");
-    $des2.text(obj.url);
+    $des2.text(baseUrl.url + obj.url);
     let $edit = getEle("button");
     $edit.attr({
         "value": "编辑",

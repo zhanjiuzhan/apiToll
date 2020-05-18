@@ -34,7 +34,7 @@ public class ApiController {
      * @return
      */
     @RequestMapping("/update")
-    int update(Api api) {
+    public int update(Api api) {
         return apiService.update(api);
     }
 
@@ -44,7 +44,7 @@ public class ApiController {
      * @return
      */
     @RequestMapping("/del")
-    int del(int id) {
+    public int del(int id) {
         return apiService.del(id);
     }
 
@@ -53,7 +53,7 @@ public class ApiController {
      * @return
      */
     @RequestMapping("/gets")
-    List<Api> gets() {
+    public List<Api> gets() {
         return apiService.gets();
     }
 
@@ -62,7 +62,7 @@ public class ApiController {
      * @return
      */
     @RequestMapping("/save")
-    int save(Api obj) {
+    public int save(Api obj) {
         Api api = apiService.get(obj.getId());
         if (api == null) {
             return apiService.add(obj);
