@@ -44,11 +44,12 @@ function urlDescription(obj) {
     });
 
     let $url = getEle("div");
+    $url.addClass("rowDiv");
     let $des1 = getEle("div");
-    $des1.addClass("filed span");
+    $des1.addClass("filed");
     $des1.text("URL");
     let $des2 = getEle("div");
-    $des2.addClass("span");
+    $des2.addClass("urlContent");
     $des2.text(obj.url);
     let $edit = getEle("button");
     $edit.attr({
@@ -69,8 +70,11 @@ function urlDescription(obj) {
     $save.click(function () {
         save(obj);
     });
-    $url.append($des1[0], $des2[0], $edit, $save, getCDiv());
-    $div.append($miaodian[0], $url[0], getform(obj));
+    let $op =  getEle("div");
+    $op.addClass("op");
+    $op.append($edit, $save);
+    $url.append($des1[0], $des2[0], $op);
+    $div.append($miaodian[0], $url[0], getCDiv(), getform(obj));
     return $div[0];
 }
 
@@ -90,7 +94,9 @@ function getform(obj) {
 
     let $des = getEle("div");
     let $des3 = getEle("div");
-    $des3.addClass("filed span");
+    $des.addClass("rowDiv");
+
+    $des3.addClass("filed");
     $des3.text("描述");
     let $des4 = getEle("label");
     $des4.attr({
@@ -98,20 +104,22 @@ function getform(obj) {
         "id": "des" + obj.id
     });
     $des4.text(obj.des);
-    $des4.addClass("span");
+    $des4.addClass("desContent");
+    $des4.addClass("save");
     $des.append($des3[0], $des4[0], getCDiv());
 
     let $request = getEle("div");
-    $request.text("Request :");
+    $request.text("Request");
     $request.css({
         "font-weight": "bold"
     });
+    $request.addClass("reqresRow");
     let $response = getEle("div");
     $response.css({
         "font-weight": "bold"
     });
-    $response.text("Response :");
-
+    $response.text("Response");
+    $response.addClass("reqresRow");
     $form.append($des[0], $request[0], getRequestDiv(obj, "req"), $response[0], getRequestDiv(obj, "res"));
     return $form[0];
 }
@@ -122,12 +130,20 @@ function edit(id) {
     $("#btn_edit_" + id).hide();
     // 描述字段可以编辑
     $("#des" + id).attr("contenteditable", "true");
+    $("#des" + id).addClass("edit");
+    $("#des" + id).removeClass("save");
     // 可以进行添加字段描述
     $("#btn_add_req" + id).show();
     $("#btn_add_res" + id).show();
     // 字段可以编辑
     $("label[name $='_" + id + "']").each(function () {
         $(this).attr("contenteditable", "true");
+        $(this).addClass("edit");
+        $(this).removeClass("save");
+        if ($(this).attr("name").indexOf("des_") > -1) {
+            $(this).addClass("des_data_edit");
+            $(this).removeClass("des_data_save");
+        }
     });
     $("button[name='btn_del_" + id +"']").each(function () {
         $(this).show();
@@ -141,12 +157,20 @@ function save(obj) {
     // 保存描述字段的内容
     let destext = $("#des" + obj.id).text();
     $("#des" + obj.id).attr("contenteditable", "false");
+    $("#des" + obj.id).addClass("save");
+    $("#des" + obj.id).removeClass("edit");
     // 可以进行添加字段描述
     $("#btn_add_req" + obj.id).hide();
     $("#btn_add_res" + obj.id).hide();
     // 字段不可以编辑
     $("label[name $='_" + obj.id + "']").each(function () {
         $(this).attr("contenteditable", "false");
+        $(this).addClass("save");
+        $(this).removeClass("edit");
+        if ($(this).attr("name").indexOf("des_") > -1) {
+            $(this).addClass("des_data_save");
+            $(this).removeClass("des_data_edit");
+        }
     });
     $("button[name='btn_del_" + obj.id +"']").each(function () {
         $(this).hide();
@@ -188,6 +212,7 @@ function getRequestDiv(obj, sig) {
         addData(obj.id, sig);
     });
     $addData.hide();
+    $addData.addClass("addBtn");
 
     $div.append($addData);
     return $div[0];
@@ -199,9 +224,10 @@ function addData(id, sig, content) {
         "name": "btn_del_" + id
     });
     $delData.text("删除");
+    $delData.addClass("delBtn")
 
     let $div = getEle("div");
-
+    $div.addClass("rowDiv");
     let $filed = getEle("label");
     $filed.attr("name", "filed_" + sig+ "_" + id);
 
@@ -218,14 +244,20 @@ function addData(id, sig, content) {
         $filed.attr("contenteditable", "false");
         $type.attr("contenteditable", "false");
         $des.attr("contenteditable", "false");
+        $des.addClass("des_data_save save");
+        $type.addClass("type_data save");
+        $filed.addClass("filed_data save");
         $delData.hide();
     } else {
-        $type.text("进行添加...");
-        $filed.text("进行添加...");
-        $des.text("进行添加...");
+        $type.text("");
+        $filed.text("");
+        $des.text("");
         $filed.attr("contenteditable", "true");
         $type.attr("contenteditable", "true");
         $des.attr("contenteditable", "true");
+        $des.addClass("des_data_edit edit");
+        $type.addClass("type_data edit");
+        $filed.addClass("filed_data edit")
     }
 
     $delData.click(function () {
@@ -234,7 +266,8 @@ function addData(id, sig, content) {
 
     $div.append($filed, $type, $des,  $delData);
 
-    $("#" + sig+ "_" + id).prepend($div);
+    $("#btn_add_" + sig + id).before($div, getCDiv());
+    //$("#" + sig+ "_" + id).prepend($div, getCDiv());
 }
 
 

@@ -22,56 +22,154 @@
             clear: both;
         }
         .menu {
+            position: fixed;
+            left: 0;
+            top: 20px;
+            width: 300px;
+            margin-left: 20px;
+        }
+        .edit {
+            background-color: #f5fffa;
+        }
+
+        .delBtn {
+            background-color: #f5fffa;
+            width: 10%;
+            padding: 5px 10px;
             float: left;
-            width: 20%;
-            margin-right: 20px;
+            height: 30px;
+        }
+
+        .save {
+            background-color: #fffafa;
+        }
+        .menu .title {
+            background-image: url("img/api.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 177px;
+            height: 47px;
+        }
+        .menu a {
+            text-decoration: none;
+        }
+        .menu a:link {
+            color: black;
+        }
+        .menu a:visited {
+            color: black;
+        }
+        .menu a:hover {
+            color: blue;
+        }
+        .menu a:active  {
+            color: black;
         }
         .body {
             float: left;
             width: 78%;
+            margin-left: 300px;
+            padding: 50px 20px 20px 0px;
         }
         .description {
-            margin: 10px;
+            margin-bottom: 30px;
+            border-top-style: solid;
+            border-top-color: #99ccff;
         }
 
+        .rowDiv {
+            margin: 2px 0px;
+        }
         .filed {
-            width: 70px;
+            padding: 5px 10px;
+            width: 10%;
             font-weight: bold;
-        }
+            background-color: aliceblue;
+            float: left;
 
+        }
+        .op {
+            float: left;
+            padding: 5px 10px;
+            width: 10%;
+            font-weight: bold;
+            background-color: aliceblue;
+            text-align: center;
+        }
+        .reqresRow {
+            margin: 2px 0px;
+            padding: 5px 10px;
+            width: 97.9%;
+            font-weight: bold;
+            background-color: aliceblue;
+        }
         .clear {
             clear: both;
         }
-        .span {
-            margin-right: 20px;
-            text-align: left;
-            float:left;
+        .urlContent {
+            padding: 5px 10px;
+            font-weight: bold;
+            width: 75%;
+            float: left;
+        }
+        .desContent {
+            padding: 5px 10px;
+            width: 86.5%;
+            float: left;
+        }
+        .filed_data {
+            padding: 5px 10px;
+            margin-right: 0.2%;
+            width: 9.8%;
+            float: left;
+            display: block;
         }
 
+        .type_data {
+            padding: 5px 10px;
+            margin-right: 0.2%;
+            width: 9.8%;
+            float: left;
+            display: block;
+        }
+        .des_data_save {
+            padding: 5px 10px;
+            width: 75%;
+            float: left;
+            display: block;
+        }
+
+        .des_data_edit {
+            padding: 5px 10px;
+            margin-right: 0.2%;
+            width: 64.8%;
+            float: left;
+            display: block;
+        }
         button {
-            background-color: white;
+            background-color: aliceblue;
             color: brown;
             width: 60px;
-            height: 25px;
-            margin-left: 20px;
+            height: 20px;
             border: none;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
         }
-        label {
-            min-width: 100px;
-            min-height: 25px;
-            margin-right: 20px;
+
+        .addBtn {
+            width: 98.9%;
+            height: 25px;
+            background-color: beige;
         }
     </style>
 </head>
 <body>
     <div id="app" class="app">
         <div class="menu">
+            <div class="title"></div>
             <ul>
-                <li v-for="api in apis" :key="api.id">
+                <li v-for="api in apis" :key="api.id" style="margin-bottom: 2px;">
                     <a :href="'#' + api.id">{{ api.des ? api.des : api.url }}</a>
                 </li>
             </ul>
